@@ -74,6 +74,9 @@ public class WebSocketCoreExample {
         .collect(new JavaPartialFunction<Message, Message>() {
           @Override
           public Message apply(Message msg, boolean isCheck) throws Exception {
+
+
+            System.out.println("apply isCheck is " + isCheck);
             if (isCheck) {
               if (msg.isText()) {
                 return null;
