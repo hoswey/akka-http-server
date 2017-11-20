@@ -40,7 +40,12 @@
         </executions>
         <configuration>
           <mainClass>com.mycompany.app.MinimalHttpApp</mainClass>
-          <arguments/>
+          <arguments>
+            <argument>-XX:+UseConcMarkSweepGC</argument>
+            <argument>-Xmx=2g</argument>
+            <argument>-Xms=2g</argument>
+            <argument>-Xmn=1g</argument>
+          </arguments>
         </configuration>
       </plugin>
       <plugin>
