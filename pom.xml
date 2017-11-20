@@ -47,6 +47,8 @@
             <argument>-Xms3g</argument>
             <argument>-XX:NewSize=2g</argument>
             <argument>-XX:MaxNewSize=2g</argument>
+            <classpath />
+            <argument>com.mycompany.app.MinimalHttpApp</argument>
           </arguments>
         </configuration>
       </plugin>
