@@ -54,7 +54,7 @@ public class WebSocketCoreExample {
       final Function<HttpRequest, HttpResponse> handler = request -> handleRequest(request);
       CompletionStage<ServerBinding> serverBindingFuture =
         Http.get(system).bindAndHandleSync(
-          handler, ConnectHttp.toHost("localhost", 8082), materializer);
+          handler, ConnectHttp.toHost("0.0.0.0", 8082), materializer);
 
       // will throw if binding fails
       serverBindingFuture.toCompletableFuture().get(1, TimeUnit.SECONDS);
