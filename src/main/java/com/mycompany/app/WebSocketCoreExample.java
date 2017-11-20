@@ -24,6 +24,7 @@ import akka.stream.javadsl.Source;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("Convert2MethodRef")
@@ -75,7 +76,7 @@ public class WebSocketCoreExample {
           @Override
           public Message apply(Message msg, boolean isCheck) throws Exception {
 
-            System.out.println("apply isCheck is " + isCheck);
+          //  System.out.println("apply isCheck is " + isCheck);
             if (isCheck) {
               if (msg.isText()) {
                 return null;
@@ -93,14 +94,16 @@ public class WebSocketCoreExample {
 
     // optimization that directly creates a simple response...
     if (msg.isStrict()) {
-      System.out.println("Strict message is " + msg.getStrictText());
+      if (ThreadLocalRandom.current().nextInt(1000) == 0) {
+        System.out.println("Strict message is " + msg.getStrictText());
+      }
 
       return TextMessage.create("Hello " + msg.getStrictText());
     }
     // ... this would suffice to handle all text messages in a streaming fashion
     else
     {
-      System.out.println("Stream message is " + msg.getStreamedText());
+     // System.out.println("Stream message is " + msg.getStreamedText());
       return TextMessage.create(Source.single("Hello ").concat(msg.getStreamedText()));
     }
   }
