@@ -96,6 +96,8 @@ public class WebSocketCoreExample {
       return TextMessage.create("Hello " + msg.getStrictText());
     } else // ... this would suffice to handle all text messages in a streaming fashion
     {
+
+      System.out.println("Stream message is " +  msg.getStreamedText());
       return TextMessage.create(Source.single("Hello ").concat(msg.getStreamedText()));
     }
   }
