@@ -32,7 +32,7 @@ public class WebSocketCoreExample {
   //#websocket-handling
   public static HttpResponse handleRequest(HttpRequest request) {
 
-    System.out.println("Handling request to " + request.getUri());
+   // System.out.println("Handling request to " + request.getUri());
 
     if (request.getUri().path().equals("/greeter")) {
       final Flow<Message, Message, NotUsed> greeterFlow = greeter();
@@ -75,7 +75,6 @@ public class WebSocketCoreExample {
           @Override
           public Message apply(Message msg, boolean isCheck) throws Exception {
 
-
             System.out.println("apply isCheck is " + isCheck);
             if (isCheck) {
               if (msg.isText()) {
@@ -91,17 +90,17 @@ public class WebSocketCoreExample {
   }
 
   public static TextMessage handleTextMessage(TextMessage msg) {
-    if (msg.isStrict()) // optimization that directly creates a simple response...
-    {
 
-
-      System.out.println("Strict message is " +  msg.getStrictText());
+    // optimization that directly creates a simple response...
+    if (msg.isStrict()) {
+      System.out.println("Strict message is " + msg.getStrictText());
 
       return TextMessage.create("Hello " + msg.getStrictText());
-    } else // ... this would suffice to handle all text messages in a streaming fashion
+    }
+    // ... this would suffice to handle all text messages in a streaming fashion
+    else
     {
-
-      System.out.println("Stream message is " +  msg.getStreamedText());
+      System.out.println("Stream message is " + msg.getStreamedText());
       return TextMessage.create(Source.single("Hello ").concat(msg.getStreamedText()));
     }
   }
