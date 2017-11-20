@@ -40,6 +40,7 @@
         </executions>
         <configuration>
           <mainClass>com.mycompany.app.MinimalHttpApp</mainClass>
+          <executable>java</executable>
           <arguments>
             <argument>-XX:+UseConcMarkSweepGC</argument>
             <argument>-Xmx3g</argument>
