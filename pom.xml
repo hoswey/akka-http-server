@@ -44,7 +44,8 @@
             <argument>-XX:+UseConcMarkSweepGC</argument>
             <argument>-Xmx3g</argument>
             <argument>-Xms3g</argument>
-            <argument>-Xmn2g</argument>
+            <argument>-XX:NewSize=2g</argument>
+            <argument>-XX:MaxNewSize=2g</argument>
           </arguments>
         </configuration>
       </plugin>
