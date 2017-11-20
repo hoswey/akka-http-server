@@ -31,7 +31,8 @@ public class WebSocketCoreExample {
 
   //#websocket-handling
   public static HttpResponse handleRequest(HttpRequest request) {
-    //System.out.println("Handling request to " + request.getUri());
+
+    System.out.println("Handling request to " + request.getUri());
 
     if (request.getUri().path().equals("/greeter")) {
       final Flow<Message, Message, NotUsed> greeterFlow = greeter();
