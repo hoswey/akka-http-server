@@ -11,7 +11,7 @@ public class MinimalHttpApp extends HttpApp {
   public static void main(String[] args) throws Exception {
 
     HttpApp httpApp = new MinimalHttpApp();
-    httpApp.startServer("0.0.0.0", 8080);
+    httpApp.startServer("0.0.0.0", 8081);
   }
 
   @Override
