@@ -5,22 +5,9 @@ package com.mycompany.app;
  */
 //#websocket-example-using-core
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.TimeUnit;
-
 import akka.NotUsed;
-import akka.http.javadsl.ConnectHttp;
-import akka.japi.Function;
-import akka.japi.JavaPartialFunction;
-
-import akka.stream.ActorMaterializer;
-import akka.stream.Materializer;
-import akka.stream.javadsl.Flow;
-import akka.stream.javadsl.Source;
-
 import akka.actor.ActorSystem;
+import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
 import akka.http.javadsl.model.HttpRequest;
@@ -28,13 +15,23 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.ws.Message;
 import akka.http.javadsl.model.ws.TextMessage;
 import akka.http.javadsl.model.ws.WebSocket;
+import akka.japi.Function;
+import akka.japi.JavaPartialFunction;
+import akka.stream.ActorMaterializer;
+import akka.stream.Materializer;
+import akka.stream.javadsl.Flow;
+import akka.stream.javadsl.Source;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("Convert2MethodRef")
 public class WebSocketCoreExample {
 
   //#websocket-handling
   public static HttpResponse handleRequest(HttpRequest request) {
-    System.out.println("Handling request to " + request.getUri());
+    //System.out.println("Handling request to " + request.getUri());
 
     if (request.getUri().path().equals("/greeter")) {
       final Flow<Message, Message, NotUsed> greeterFlow = greeter();
@@ -68,8 +65,7 @@ public class WebSocketCoreExample {
   //#websocket-handler
 
   /**
-   * A handler that treats incoming messages as a name,
-   * and responds with a greeting to that name
+   * A handler that treats incoming messages as a name, and responds with a greeting to that name
    */
   public static Flow<Message, Message, NotUsed> greeter() {
     return
@@ -93,6 +89,10 @@ public class WebSocketCoreExample {
   public static TextMessage handleTextMessage(TextMessage msg) {
     if (msg.isStrict()) // optimization that directly creates a simple response...
     {
+
+
+      System.out.println("Strict message is " +  msg.getStrictText());
+
       return TextMessage.create("Hello " + msg.getStrictText());
     } else // ... this would suffice to handle all text messages in a streaming fashion
     {
